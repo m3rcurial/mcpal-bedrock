@@ -6,7 +6,6 @@ use std::process::{Command, Stdio};
 
 fn main() {
     let args: Vec<String> = env::args().skip(1).collect();
-    let bedrock_server_location  = Path::new("/home/mercurial/github/mcpal-bedrock/bedrock-server");
     let start_server_cmd = "./bedrock_server";
     let save_hold_cmd = "save hold";
     let save_query_cmd = "save query";
@@ -14,8 +13,9 @@ fn main() {
 
     if args.len() != 0 {
         let backup_path = &args[0];
+        let bedrock_server_location  = Path::new(&args[1]);
 
-        env::set_current_dir(&bedrock_server_location).expect("Couldn't chagne directory");
+        env::set_current_dir(&bedrock_server_location).expect("Couldn't change directory");
 
         let cmd_output = Command::new(start_server_cmd)
             .stdin(Stdio::null())
